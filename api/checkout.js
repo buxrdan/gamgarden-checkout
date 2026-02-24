@@ -27,12 +27,20 @@ module.exports = async function handler(req, res) {
       mode: 'payment',
       success_url: 'https://gamgarden.shop/thank-you',
       cancel_url: 'https://gamgarden.shop',
+
+      // 🔥 Stripe Connect section
+      payment_intent_data: {
+        application_fee_amount: Math.round(amount * 0.01), // 1% platform fee (change if needed)
+        transfer_data: {
+          destination: 'acct_1T4PAyLLsG87wzIA',
+        },
+      },
     });
 
     return res.redirect(303, session.url);
 
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: err.message });
   }
 };
