@@ -32,7 +32,7 @@ module.exports = async function handler(req, res) {
       payment_intent_data: {
         application_fee_amount: Math.round(amount * 0.01), // 1% platform fee (change if needed)
         transfer_data: {
-          destination: 'acct_1T4PAyLLsG87wzIA',
+          destination: 'acct_1T4SaSLGpWkMdyVN',
         },
       },
     });
