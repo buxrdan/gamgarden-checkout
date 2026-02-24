@@ -1,0 +1,77 @@
+{
+  "name": "gamgarden-checkout",
+  "version": "1.0.0",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}
+```
+Click **"Commit new file"** ✅
+
+---
+
+## Step 4 — Connect Vercel to GitHub
+
+1. Go to → **https://vercel.com**
+2. Click **"Sign up"** → choose **"Continue with GitHub"**
+3. Click **"New Project"**
+4. Find `gamgarden-checkout` → click **"Import"**
+5. Click **"Deploy"**
+
+---
+
+## Step 5 — Add Secret Key in Vercel
+
+After deploy, go to:
+```
+Vercel Dashboard → gamgarden-checkout 
+→ Settings → Environment Variables
+
+Name:   STRIPE_SECRET_KEY
+Value:  sk_live_YOUR_NEW_ROTATED_KEY  ← your new key
+
+Click Save → Redeploy ✅
+```
+
+---
+
+## Step 6 — Add Custom Domain in Vercel
+
+1. Vercel Dashboard → your project → **Settings → Domains**
+2. Add: `pay.gamgarden.shop`
+3. Vercel gives you DNS records to add in Shopify
+
+---
+
+## Step 7 — Add DNS in Shopify
+
+1. Shopify Admin → **Online Store → Domains**
+2. Click `gamgarden.shop` → **DNS Settings**
+3. Add the CNAME record Vercel gave you:
+```
+Type:   CNAME
+Name:   pay
+Value:  cname.vercel-dns.com
+```
+
+---
+
+## Step 8 — Final Button URL
+
+In **Mega External Link Buttons**, set each product URL:
+```
+https://pay.gamgarden.shop/api/checkout?price=13500&name=Storage+Shed
+https://pay.gamgarden.shop/api/checkout?price=5000&name=Garden+Chair
+```
+
+---
+
+## Summary
+```
+GitHub (stores your code)
+    ↓ auto deploys to
+Vercel (runs your backend)
+    ↓ accessible via
+pay.gamgarden.shop/api/checkout
+    ↓ customer clicks button on
+gamgarden.shop → pays → money splits to seller ✅
