@@ -9,9 +9,6 @@ export default async function handler(req, res) {
     }
 
     const amount = parseInt(price);
-    if (isNaN(amount) || amount <= 0) {
-      return res.status(400).json({ error: 'Invalid price' });
-    }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -29,7 +26,7 @@ export default async function handler(req, res) {
       payment_intent_data: {
         application_fee_amount: Math.round(amount * 0.01),
         transfer_data: {
-          destination: 'acct_1T2CBgQ3gEgG7lAm',
+          destination: 'acct_1T4PAyLLsG87wzIA', // ✅ Maria Hasin
         },
       },
     });
@@ -40,3 +37,10 @@ export default async function handler(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
+```
+
+---
+
+## Your Button URLs for Mega External Links
+```
+https://gamgarden-checkout.vercel.app/api/checkout?price=13500&name=Storage+Shed
